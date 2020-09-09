@@ -10,6 +10,7 @@ namespace PetShop.Core.DomainService
     {
         public List<Pet> GetAllPets();
         public List<Pet> GetPetsByType(string querry);
+        public Pet GetPetById(int id);
         public bool AddNewPet(Pet pet);
         public bool DeletePet(int Id);
         public bool UpdatePet(Pet pet);

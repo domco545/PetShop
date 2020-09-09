@@ -52,6 +52,11 @@ namespace PetShop.Core.ApplicationService.Impl
             return _petRepository.GetAllPets();
         }
 
+        public Pet GetPetById(int id)
+        {
+            return _petRepository.GetPetById(id);
+        }
+
         public List<Pet> GetPetsByType(string querry)
         {
             if (_validator.StringLenght(querry, 1, 100)) 

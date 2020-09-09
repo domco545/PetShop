@@ -40,6 +40,11 @@ namespace Infrastructure.Data
             return AllPets;
         }
 
+        public Pet GetPetById(int id)
+        {
+            return AllPets.Find(pet=> pet.Id == id);
+        }
+
         public List<Pet> GetPetsByType(string querry)
         {
             return AllPets.Where(Pet => Pet.Type.ToString().ToLower().Contains(querry.ToLower())).ToList();
