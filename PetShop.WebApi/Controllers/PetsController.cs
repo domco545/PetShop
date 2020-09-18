@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Core.ApplicationService;
+using PetShop.Core.DomainService;
 using PetShop.Core.Entity;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,31 +16,60 @@ namespace PetShop.WebApi.Controllers
     public class PetsController : ControllerBase
     {
         private IPetService _petService;
+        private IValidatorService _validatorService;
 
-        public PetsController(IPetService petService)
+        public PetsController(IPetService petService, IValidatorService validatorService)
         {
             _petService = petService;
+            _validatorService = validatorService;
         }
 
         // GET: api/<PetsController>
         [HttpGet]
-        public IEnumerable<Pet> Get()
+        public ActionResult<IEnumerable<Pet>> Get()
         {
-            return _petService.GetAllPets();
+            var pets = _petService.GetAllPets();
+
+            if (pets.Count < 1)
+            {
+                return StatusCode(404, "no pets to return");
+            }
+            else
+            {
+                return pets;
+            }
         }
 
         // GET api/<PetsController>/5
         [HttpGet("{id}")]
         public ActionResult<Pet> Get(int id)
         {
-            return _petService.GetPetById(id);
+            var pet = _petService.GetPetById(id);
+            if (pet == null)
+            {
+                return StatusCode(404, "no pet with matching id");
+            }
+            else
+            {
+                return pet;
+            }
         }
 
         // POST api/<PetsController>
         [HttpPost]
-        public void Post([FromBody] Pet pet)
+        public IActionResult Post([FromBody] Pet pet)
         {
-            _petService.AddNewPet(pet);
+            try
+            {
+                _validatorService.PetValidation(pet);
+
+                _petService.AddNewPet(pet);
+                return StatusCode(201, pet);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
         }
 
         // PUT api/<PetsController>/5
@@ -50,8 +80,23 @@ namespace PetShop.WebApi.Controllers
 
         // DELETE api/<PetsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                if (_petService.DeletePet(id))
+                {
+                    return StatusCode(202, $"Deleted pet with id {id}");
+                }
+                else
+                {
+                    return StatusCode(404 , $"Pet with id {id} wasnt found");
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
         }
     }
 }

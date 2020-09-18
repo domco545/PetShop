@@ -10,5 +10,6 @@ namespace PetShop.Core.DomainService
         public bool StringLenght(string data, int minLenght, int maxLenght);
         public bool ValidEmail(string email);
         public bool PetValidation(Pet pet);
+        public bool OwnerValidation(Owner owner);
     }
 }
