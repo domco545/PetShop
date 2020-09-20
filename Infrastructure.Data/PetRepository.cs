@@ -2,6 +2,7 @@
 using PetShop.Core.Entity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -28,7 +29,7 @@ namespace Infrastructure.Data
         {
             if (!AllPets.Any(pet => pet.Id == Id)) 
             {
-                return false;
+                throw new KeyNotFoundException($"pet with id {Id} doesnt exist");
             }
 
             AllPets = AllPets.Where(pet => pet.Id != Id).ToList();
@@ -42,7 +43,14 @@ namespace Infrastructure.Data
 
         public Pet GetPetById(int id)
         {
-            return AllPets.Find(pet=> pet.Id == id);
+            var pet = AllPets.Find(pet => pet.Id == id);
+
+            if (pet == null)
+            {
+                throw new KeyNotFoundException($"pet with id {pet.Id} doesnt exist");
+            }
+
+            return pet;
         }
 
         public List<Pet> GetPetsByType(string querry)
@@ -66,7 +74,7 @@ namespace Infrastructure.Data
 
             if (ListIndex == -1)
             {
-                return false;
+                throw new KeyNotFoundException($"pet with id {pet.Id} doesnt exist");
             }
 
             AllPets[ListIndex] = pet;

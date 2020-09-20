@@ -20,6 +20,7 @@ namespace PetShop.Core.ApplicationService.Impl
 
         public bool AddNewPet(Pet pet)
         {
+            _validator.PetValidation(pet);
             return _petRepository.AddNewPet(pet);
         }
 
@@ -83,6 +84,7 @@ namespace PetShop.Core.ApplicationService.Impl
         {
             if (pet.Id > -1)
             {
+                _validator.PetValidation(pet);
                 _petRepository.UpdatePet(pet);
             }
             else

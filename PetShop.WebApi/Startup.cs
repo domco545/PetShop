@@ -32,18 +32,22 @@ namespace PetShop.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IPetRepository, PetRepository>();
+            services.AddSingleton<IOwnerRepository, OwnerRepository>();
+            services.AddSingleton<IPetTypeRepository, PetTypeRepository>();
             services.AddScoped<IValidatorService, ValidatorService>();
             services.AddScoped<IPetService, PetService>();
+            services.AddScoped<IOwnerService, OwnerService>();
+            services.AddScoped<IPetTypeService, PetTypeService>();
             services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IPetRepository petRepository)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IPetRepository petRepository, IOwnerRepository ownerRepository, IPetTypeRepository petTypeRepository)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                var data = new InitData(petRepository);
+                var data = new InitData(petRepository, ownerRepository, petTypeRepository);
             }
 
             app.UseHttpsRedirection();

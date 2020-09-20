@@ -16,7 +16,7 @@ namespace PetShop.Core.DomainService.Impl
                 throw new InvalidDataException("Name cannot be empty or null and needs to be between 4 and 100 characters");
             }
 
-            if (!Enum.IsDefined(typeof(Pet.TypeOfPet), pet.Type))
+            if (!PetTypeValidator(pet.Type))
             {
                 throw new InvalidDataException("Pet needs to have valid pet type");
             }
@@ -76,6 +76,21 @@ namespace PetShop.Core.DomainService.Impl
             if (!ValidEmail(owner.Email))
             {
                 throw new InvalidDataException("Invalid email");
+            }
+
+            return true;
+        }
+
+        public bool PetTypeValidator(PetType petType) 
+        {
+            if (petType.Id < 0)
+            {
+                throw new InvalidDataException("ivalid pet type Id");
+            }
+
+            if (string.IsNullOrEmpty(petType.Name))
+            {
+                throw new InvalidDataException("pet type name cannot be empty");
             }
 
             return true;

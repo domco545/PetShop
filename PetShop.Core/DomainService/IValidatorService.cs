@@ -11,5 +11,6 @@ namespace PetShop.Core.DomainService
         public bool ValidEmail(string email);
         public bool PetValidation(Pet pet);
         public bool OwnerValidation(Owner owner);
+        public bool PetTypeValidator(PetType petType);
     }
 }

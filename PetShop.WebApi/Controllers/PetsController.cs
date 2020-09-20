@@ -44,14 +44,17 @@ namespace PetShop.WebApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Pet> Get(int id)
         {
-            var pet = _petService.GetPetById(id);
-            if (pet == null)
+            try
             {
-                return StatusCode(404, "no pet with matching id");
+                return _petService.GetPetById(id);
             }
-            else
+            catch (KeyNotFoundException e)
             {
-                return pet;
+                return StatusCode(404, e.Message);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
             }
         }
 
@@ -61,8 +64,6 @@ namespace PetShop.WebApi.Controllers
         {
             try
             {
-                _validatorService.PetValidation(pet);
-
                 _petService.AddNewPet(pet);
                 return StatusCode(201, pet);
             }
@@ -84,14 +85,11 @@ namespace PetShop.WebApi.Controllers
         {
             try
             {
-                if (_petService.DeletePet(id))
-                {
-                    return StatusCode(202, $"Deleted pet with id {id}");
-                }
-                else
-                {
-                    return StatusCode(404 , $"Pet with id {id} wasnt found");
-                }
+                return StatusCode(202, $"Deleted pet with id {id}");
+            }
+            catch (KeyNotFoundException e)
+            {
+                return StatusCode(404, e.Message);
             }
             catch (Exception e)
             {
