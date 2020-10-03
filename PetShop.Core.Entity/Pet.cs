@@ -14,7 +14,7 @@ namespace PetShop.Core.Entity
           Bird,
         }
 
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         //public TypeOfPet Type { get; set; }
         public PetType Type { get; set; }

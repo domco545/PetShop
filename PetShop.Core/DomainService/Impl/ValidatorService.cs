@@ -31,7 +31,7 @@ namespace PetShop.Core.DomainService.Impl
                 throw new InvalidDataException("Sold date cannot be null");
             }
 
-            if (string.IsNullOrEmpty(pet.Color) || StringLenght(pet.Color, 2, 100))
+            if (string.IsNullOrEmpty(pet.Color) || !StringLenght(pet.Color, 2, 100))
             {
                 throw new InvalidDataException("Pet color cannot be empty and needs to be between 2 and 100 characters");
             }
