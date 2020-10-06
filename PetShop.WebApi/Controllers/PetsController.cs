@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.DomainService;
@@ -25,6 +26,7 @@ namespace PetShop.WebApi.Controllers
         }
 
         // GET: api/<PetsController>
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get()
         {

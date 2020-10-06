@@ -19,7 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.WebApi", "PetShop.WebApi\PetShop.WebApi.csproj", "{B5A5FE2F-7355-4788-8CD6-59A28A55F415}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.SQLite", "Infrastructure.SQLite\Infrastructure.SQLite.csproj", "{FB5C2612-1805-47CC-A791-FAD02AFEFD17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.SQLite", "Infrastructure.SQLite\Infrastructure.SQLite.csproj", "{FB5C2612-1805-47CC-A791-FAD02AFEFD17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Authentication", "Infrastructure.Authentication\Infrastructure.Authentication.csproj", "{B784EF71-7E76-4D2E-8020-F13887669DAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{FB5C2612-1805-47CC-A791-FAD02AFEFD17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB5C2612-1805-47CC-A791-FAD02AFEFD17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB5C2612-1805-47CC-A791-FAD02AFEFD17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B784EF71-7E76-4D2E-8020-F13887669DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B784EF71-7E76-4D2E-8020-F13887669DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B784EF71-7E76-4D2E-8020-F13887669DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B784EF71-7E76-4D2E-8020-F13887669DAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{08DB0365-12EC-4082-A8C3-364F98BF4A43} = {6D6B2D06-D33B-4E06-B0E8-F486EDF8E06D}
 		{B5A5FE2F-7355-4788-8CD6-59A28A55F415} = {525AEFE7-04C0-4486-977F-CA73B298946C}
 		{FB5C2612-1805-47CC-A791-FAD02AFEFD17} = {6D6B2D06-D33B-4E06-B0E8-F486EDF8E06D}
+		{B784EF71-7E76-4D2E-8020-F13887669DAA} = {6D6B2D06-D33B-4E06-B0E8-F486EDF8E06D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0919C806-1D2B-4C44-8686-D2EEC3DE5B44}
